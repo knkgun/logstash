@@ -107,7 +107,7 @@ module ServiceTester
     end
 
     def package_for(filename, skip_jdk_infix, bundled_jdk, base=ServiceTester::Base::LOCATION)
-      jdk_arch_ext = jdk_architecture_extension(skip_jdk_infix, bundled_jdk)
+      jdk_arch_ext = jdk_architecture_extension(skip_jdk_infix, true)
       File.join(base, "#{filename}#{jdk_arch_ext}.#{package_extension}")
     end
 

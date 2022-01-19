@@ -31,6 +31,7 @@ describe "CLI operation" do
   config = ServiceTester.configuration
   config.servers.each do |address|
     logstash = ServiceTester::Artifact.new(address, config.lookup[address])
+    logstash.run_command("unset LS_JAVA_HOME")
     it_behaves_like "logstash version", logstash
     it_behaves_like "logstash install", logstash
     it_behaves_like "logstash list", logstash
