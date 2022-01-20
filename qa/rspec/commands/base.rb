@@ -86,6 +86,8 @@ module ServiceTester
     #   - the block should emit `true` iff the yielded gemspec meets the requirement, and `false` otherwise
     def gem_vendored?(host, gem_name)
       cmd = run_command("find /usr/share/logstash/vendor/bundle/jruby/*/specifications -name '#{gem_name}-*.gemspec'", host)
+      puts "Output of find is "
+      puts cmd.stdout
       matches = cmd.stdout.lines
       matches.map do |path_to_gemspec|
         filename = path_to_gemspec.split('/').last
