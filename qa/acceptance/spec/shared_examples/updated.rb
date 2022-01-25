@@ -45,10 +45,5 @@ RSpec.shared_examples "updated" do |logstash|
     with_running_logstash_service(logstash) do
       expect(logstash).to be_running
     end
-
-    # with_running_logstash_service(logstash, "/usr/share/logstash/jdk/bin/java") do
-    #   expect(logstash).to be_running_with("/usr/share/logstash/jdk/bin/java")
-    # end
-
   end
 end

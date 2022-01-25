@@ -23,7 +23,6 @@ require_relative '../shared_examples/updated'
 
 # This tests verify that the generated artifacts could be used properly in a release, implements https://github.com/elastic/logstash/issues/5070
 describe "artifacts operation" do
-
   config = ServiceTester.configuration
   config.servers.each do |address|
     logstash = ServiceTester::Artifact.new(address, config.lookup[address])
