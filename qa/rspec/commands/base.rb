@@ -114,15 +114,10 @@ module ServiceTester
 
     private
     def jdk_architecture_extension(skip_jdk_infix)
-      bundled_jdk = true
       if skip_jdk_infix
         ""
       else
-        if bundled_jdk
-          "-" + architecture_extension
-        else
-          "-no-jdk"
-        end
+        "-" + architecture_extension
       end
     end
   end

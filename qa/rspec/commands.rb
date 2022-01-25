@@ -76,7 +76,7 @@ module ServiceTester
       base      = options.fetch(:base, ServiceTester::Base::LOCATION)
       @skip_jdk_infix = options.fetch(:skip_jdk_infix, false)
       filename = filename(options)
-      package   = client.package_for(filename, @skip_jdk_infix,  base)
+      package   = client.package_for(filename, @skip_jdk_infix, base)
       client.install(package, host)
     end
 

@@ -37,11 +37,11 @@ module ServiceTester
     end
 
     def architecture_extension
-      # if java.lang.System.getProperty("os.arch") == "amd64"
+      if java.lang.System.getProperty("os.arch") == "amd64"
         "x86_64"
-      # else
-      #   "aarch64"
-      # end
+      else
+        "aarch64"
+      end
     end
 
     def install(package, host=nil)

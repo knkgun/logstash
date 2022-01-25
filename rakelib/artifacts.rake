@@ -139,13 +139,13 @@ namespace "artifact" do
   task "archives" => ["prepare", "generate_build_metadata"] do
     #with bundled JDKs
     license_details = ['ELASTIC-LICENSE']
-    create_archive_pack(license_details, "x86_64", "linux")#, "windows", "darwin")
-  #  create_archive_pack(license_details, "arm64", "linux")
+    create_archive_pack(license_details, "x86_64", "linux", "windows", "darwin")
+    create_archive_pack(license_details, "arm64", "linux")
 
     #without JDK
-   # system("./gradlew bootstrap") #force the build of Logstash jars
-   # build_tar(*license_details, platform: '-no-jdk')
-   # build_zip(*license_details, platform: '-no-jdk')
+    system("./gradlew bootstrap") #force the build of Logstash jars
+    build_tar(*license_details, platform: '-no-jdk')
+    build_zip(*license_details, platform: '-no-jdk')
   end
 
   def create_archive_pack(license_details, arch, *oses)
@@ -180,13 +180,13 @@ namespace "artifact" do
   task "archives_oss" => ["prepare", "generate_build_metadata"] do
     #with bundled JDKs
     license_details = ['APACHE-LICENSE-2.0',"-oss", oss_excluder]
-    create_archive_pack(license_details, "x86_64", "linux")#, "windows", "darwin")
-  #  create_archive_pack(license_details, "arm64", "linux")
+    create_archive_pack(license_details, "x86_64", "linux", "windows", "darwin")
+    create_archive_pack(license_details, "arm64", "linux")
 
     #without JDK
- #   system("./gradlew bootstrap") #force the build of Logstash jars
- #   build_tar(*license_details, platform: '-no-jdk')
- #   build_zip(*license_details, platform: '-no-jdk')
+    system("./gradlew bootstrap") #force the build of Logstash jars
+    build_tar(*license_details, platform: '-no-jdk')
+    build_zip(*license_details, platform: '-no-jdk')
   end
 
   desc "Build an RPM of logstash with all dependencies"
@@ -195,55 +195,55 @@ namespace "artifact" do
     puts("[artifact:rpm] building rpm package x86_64")
     package_with_jdk("centos", "x86_64")
 
-   # puts("[artifact:rpm] building rpm package arm64")
-   # package_with_jdk("centos", "arm64")
+    puts("[artifact:rpm] building rpm package arm64")
+    package_with_jdk("centos", "arm64")
 
     #without JDKs
-    #system("./gradlew bootstrap") #force the build of Logstash jars
-    #package("centos")
+    system("./gradlew bootstrap") #force the build of Logstash jars
+    package("centos")
   end
 
   desc "Build an RPM of logstash with all dependencies"
   task "rpm_oss" => ["prepare", "generate_build_metadata"] do
     #with bundled JDKs
     puts("[artifact:rpm] building rpm OSS package x86_64")
-   # package_with_jdk("centos", "x86_64", :oss)
-#
-#    puts("[artifact:rpm] building rpm OSS package arm64")
-#    package_with_jdk("centos", "arm64", :oss)
+    package_with_jdk("centos", "x86_64", :oss)
+
+    puts("[artifact:rpm] building rpm OSS package arm64")
+    package_with_jdk("centos", "arm64", :oss)
 
     #without JDKs
-#    system("./gradlew bootstrap") #force the build of Logstash jars
-#    package("centos", :oss)
+    system("./gradlew bootstrap") #force the build of Logstash jars
+    package("centos", :oss)
   end
 
 
   desc "Build a DEB of logstash with all dependencies"
   task "deb" => ["prepare", "generate_build_metadata"] do
- #   #with bundled JDKs
- #   puts("[artifact:deb] building deb package for x86_64")
- #   package_with_jdk("ubuntu", "x86_64")
-#
-#    puts("[artifact:deb] building deb package for OS: linux arm64")
-#    package_with_jdk("ubuntu", "arm64")
+    #with bundled JDKs
+    puts("[artifact:deb] building deb package for x86_64")
+    package_with_jdk("ubuntu", "x86_64")
+
+    puts("[artifact:deb] building deb package for OS: linux arm64")
+    package_with_jdk("ubuntu", "arm64")
 
     #without JDKs
- #   system("./gradlew bootstrap") #force the build of Logstash jars
- #   package("ubuntu")
+    system("./gradlew bootstrap") #force the build of Logstash jars
+    package("ubuntu")
   end
 
   desc "Build a DEB of logstash with all dependencies"
   task "deb_oss" => ["prepare", "generate_build_metadata"] do
-  #  #with bundled JDKs
-  #  puts("[artifact:deb_oss] building deb OSS package x86_64")
-  #  package_with_jdk("ubuntu", "x86_64", :oss)
-#
-#    puts("[artifact:deb_oss] building deb OSS package arm64")
-#    package_with_jdk("ubuntu", "arm64", :oss)
+    #with bundled JDKs
+    puts("[artifact:deb_oss] building deb OSS package x86_64")
+    package_with_jdk("ubuntu", "x86_64", :oss)
+
+    puts("[artifact:deb_oss] building deb OSS package arm64")
+    package_with_jdk("ubuntu", "arm64", :oss)
 
     #without JDKs
- #   system("./gradlew bootstrap") #force the build of Logstash jars
- #   package("ubuntu", :oss)
+    system("./gradlew bootstrap") #force the build of Logstash jars
+    package("ubuntu", :oss)
   end
 
   desc "Generate logstash core gems"

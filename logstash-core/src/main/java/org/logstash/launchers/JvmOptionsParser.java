@@ -70,6 +70,7 @@ public class JvmOptionsParser {
                     "Expected two arguments specifying path to LOGSTASH_HOME and an optional LS_JVM_OPTS, but was " + Arrays.toString(args)
             );
         }
+        bailOnOldJava();
         final String lsJavaOpts = System.getenv("LS_JAVA_OPTS");
         handleJvmOptions(args, lsJavaOpts);
     }
