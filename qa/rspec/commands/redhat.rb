@@ -49,12 +49,14 @@ module ServiceTester
       errors = []
       exit_status = 0
       at(hosts, {in: :serial}) do |_host|
+        puts "Install #{package}"
         cmd = sudo_exec!("yum install -y  #{package}")
+        puts cmd.stdout
         exit_status += cmd.exit_status
         errors << cmd.stderr unless cmd.stderr.empty?
       end
       if exit_status > 0 
-        raise InstallException.new(errors.join("\n"))
+        raise InstallException.new("Error installing #{package}, #{errors.join('\n')}")
       end
     end
 
